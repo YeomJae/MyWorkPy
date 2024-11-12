@@ -1,4 +1,4 @@
-"""주석 달기"""
+"""주석 추가"""
 
 # pandas 클래스 불러오기
 import pandas as pd
