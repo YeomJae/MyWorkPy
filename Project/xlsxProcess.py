@@ -1,4 +1,4 @@
-# [pandas, util(커스텀1), dataProcess(커스텀2)] 클래스 불러오기
+# [pandas, util(사용자커스텀1), dataProcess(사용자커스텀2)] 클래스 불러오기
 import pandas as pd
 import util
 import dataProcess as dp
@@ -15,14 +15,14 @@ SHEET_NAMES = {
     "error_check": "오류확인대상"
 }
 
-# 비즈니스 로직을 별도 함수로 정의하기
+# 비즈니스 로직을 함수로 정의하기
 def toExcelErp(directory: SystemError, filename):
     
     # 1. 작업용 파일에서 계좌번호를 추출하여 각 변수에 값으로 지정하기
     filename2 = filename.split('_')[1][-6:]
     account_num = filename.split('_')[1]
 
-    	# 2. 작업용 및 작업완료 후 파일의 위치를 각 변수에 값으로 지정하기
+    # 2. 작업용 및 작업완료 후 파일의 위치를 각 변수에 값으로 지정하기
     file_paths = {
         "bank": f"{directory}/workF/{filename}.xls",
         "saer": f"{directory}/workF/거래처원장 {filename2}.xls"
