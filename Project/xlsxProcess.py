@@ -66,18 +66,9 @@ def toExcelErp(directory: SystemError, filename):
     df_pivot_out = pd.read_excel(output_file_path, sheet_name=SHEET_NAMES["pivot_out"])
     df_pivot_in = pd.read_excel(output_file_path, sheet_name=SHEET_NAMES["pivot_in"])
 
-    # 11. 입출금내역에서 오류값만 추출하고 하나로 병합하기 위해 컬럼명을 일치시켜줌 (출금차액, 입금차액 -> 차액): dataProcess 클래스의 함수 이용
-    df_pivot_out = dp.preprocess_pivot_out_data(df_pivot_out)
-    df_pivot_in = dp.preprocess_pivot_in_data(df_pivot_in)
-
-    # 12. 가공한 데이터프레임을 하나로 병합하여 새로운 데이터프레임으로 clipboard에 저장하기: dataProcess 클래스의 함수 이용
+    # 11. 읽어온 데이터프레임을 하나로 병합하여 새로운 데이터프레임으로 clipboard에 저장하기: dataProcess 클래스의 함수 이용
     df_pivot_comb = dp.combine_df_pivot_data(df_pivot_out, df_pivot_in)
 
-    # 13. clipboard에 저장한 데이터프레임을 각각의 지정 시트로 분류하고 하나의 엑셀파일로 최종 저장하기
+    # 12. clipboard에 저장한 데이터프레임을 지정 시트로 분류하고 하나의 엑셀파일로 최종 저장하기
     with pd.ExcelWriter(output_file_path) as writer:
-        df_bank.to_excel(writer, sheet_name=SHEET_NAMES["bank"], index=False)
-        df_saer.to_excel(writer, sheet_name=SHEET_NAMES["saer"], index=False)
-        df_combined.to_excel(writer, sheet_name=SHEET_NAMES["combined"], index=False)
-        df_pivot_out.to_excel(writer, sheet_name=SHEET_NAMES["pivot_out"])
-        df_pivot_in.to_excel(writer, sheet_name=SHEET_NAMES["pivot_in"])
         df_pivot_comb.to_excel(writer, sheet_name=SHEET_NAMES["error_check"], index=False)
