@@ -80,7 +80,7 @@ def combine_df_pivot_data(df_pivot_out, df_pivot_in):
     df_pivot_in = df_pivot_in[['거래일시','은행자료','회계자료','입금차액','상태']]
     df_pivot_in.columns = ['거래일시','은행자료','회계자료','차액','상태']
     # 상태 컬럼이 오류값인 행만 추출하기 
-    df_pivot_in = df_pivot_in[df_pivot_in['상태'].str.contains('오류', na=False)
+    df_pivot_in = df_pivot_in[df_pivot_in['상태'].str.contains('오류', na=False)]
     # '구분' 컬럼을 첫번째(제일 왼쪽) 위치에 추가하고 그 값을 피봇입금 시트 이름으로 넣어주기 
     df_pivot_in.insert(0, '구분', SHEET_NAMES["pivot_in"])
 
